@@ -37,7 +37,7 @@ void Draw(int height, int width, Object fruit, Snake snake)
             {
                 continue;
             }
-            // If food
+            // If fruit
             else if (j == fruit.getX() && i == fruit.getY())
             {
                 std::cout << "F";
@@ -97,35 +97,51 @@ bool isCollideFruit(Object fruit, Snake snake)
 bool isCollideWall(Snake snake, int height, int width)
 {
     return (snake.getX() < 0 || snake.getY() < 0
-        || snake.getY() > height || snake.getX() > width);
+        || snake.getY() >= height || snake.getX() >= width);
+}
+
+bool isRestart()
+{
+    while (true)
+    {
+        std::string choice;
+        std::cout << "Try again? (Y/N): ";
+        std::cin >> choice;
+        if (choice == "Y" || choice == "y")
+            return true;
+        else if (choice == "N" || choice == "n")
+            return false;
+        else
+            std::cout << "Please enter Y or N." << std::endl;
+    }
 }
 
 int main()
 {
-    bool gameOver = false;
-    const int height = 24;
-    const int width = 48;
-    int score = 0;
-    Object fruit(0 + rand() % width, 0 + rand() % height);
-    Snake snake;
-    snake.setX(5);
-    snake.setY(5);
-    while (!gameOver)
-    {
-        Draw(height, width, fruit, snake);
-        ControlSnake(snake);
-        if (isCollideFruit(fruit, snake))
+    do {
+        bool gameOver = false;
+        const int height = 24;
+        const int width = 48;
+        int score = 0;
+        Object fruit(rand() % width, rand() % height);
+        Snake snake;
+        while (!gameOver)
         {
-            snake.Grow();
-            score++;
-            fruit.setX(0 + rand() % width);
-            fruit.setY(0 + rand() % height);
+            Draw(height, width, fruit, snake);
+            ControlSnake(snake);
+            if (isCollideFruit(fruit, snake))
+            {
+                snake.Grow();
+                score++;
+                fruit.setX(rand() % width);
+                fruit.setY(rand() % height);
+            }
+            else if (isCollideWall(snake, height, width) || snake.isCollideSelf())
+            {
+                gameOver = true;
+            }
+            std::cout << std::endl << "Score: " << score;
         }
-        else if (isCollideWall(snake, height, width) || snake.isCollideSelf())
-        {
-            gameOver = true;
-        }
-        std::cout << std::endl << "Score: ";
-    }
-    std::cout << std::endl << "You lost!";
+        std::cout << std::endl << "Game over! ";
+    } while (isRestart());
 }
