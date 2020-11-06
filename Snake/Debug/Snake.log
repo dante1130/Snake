@@ -1,0 +1,7 @@
+﻿  Game.cpp
+C:\Users\User\OneDrive\Programming\C++ Scripts\Snake\Snake\Game.cpp(25,31): warning C4018: '<': signed/unsigned mismatch
+  Snake.cpp
+C:\Users\User\OneDrive\Programming\C++ Scripts\Snake\Snake\Snake.cpp(65,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\OneDrive\Programming\C++ Scripts\Snake\Snake\Snake.cpp(130,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Snake.vcxproj -> C:\Users\User\OneDrive\Programming\C++ Scripts\Snake\Debug\Snake.exe
