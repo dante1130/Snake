@@ -1,2 +1,2 @@
-# games
-Some games that I made for fun.
+# Snake
+Snake games made in PyGame and C++ CLI for fun.
